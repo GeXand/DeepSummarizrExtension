@@ -1,19 +1,21 @@
-// Copyright 2018 The Chromium Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style license that can be
-// found in the LICENSE file.
-
 'use strict';
 
-let changeColor = document.getElementById('changeColor');
+const btn = document.querySelector('button');
 
-chrome.storage.sync.get('color', function(data) {
-  changeColor.style.backgroundColor = data.color;
-  changeColor.setAttribute('value', data.color);
+var url;
+chrome.tabs.query({active: true, lastFocusedWindow: true}, tabs => {
+  url = tabs[0].url;
 });
 
-changeColor.onclick = function(element) {
-  let color = element.target.value;
-    chrome.tabs.executeScript(
-        tabs[0].id,
-        {code: 'document.body.style.backgroundColor = "' + color + '";'});
-};
+function sendData(data) {
+  fetch('https://summarizr1.pythonanywhere.com/extensionResult/', {
+    method: "POST",
+    body: JSON.stringify(data)
+  }).then(res => {
+    console.log("Request complete! Response: ", res);
+  });
+}
+
+btn.addEventListener('click', function() {
+  sendData(url);
+});

@@ -1,14 +1,13 @@
 {
-  "name": "Getting Started Example",
+  "name": "Deep Summarizr",
   "version": "1.0",
-  "description": "Build an Extension!",
-  "permissions": ["activeTab", "declarativeContent", "storage"],
-  "options_page": "options.html",
+  "description": "Get a quick summary of a website or pdf using Deep Learning!",
+  "permissions": ["activeTab", "declarativeContent", "storage", "tabs", "*://summarizr1.pythonanywhere.com/*"],
   "background": {
     "scripts": ["background.js"],
     "persistent": false
   },
-  "page_action": {
+  "browser_action": {
     "default_popup": "popup.html",
     "default_icon": {
       "16": "images/get_started16.png",
