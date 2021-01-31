@@ -1,19 +1,58 @@
-<!DOCTYPE html>
 <html>
   <head>
     <style>
-      body{
-        width: 450px;
-        height:350px;
-      }
+        * {
+            font-family: Arial, Helvetica, sans-serif;
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        .wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 14px;
+        }
+        body{
+            width: 450px;
+            height:350px;
+        }
+        #summary-result {
+            font-size: 18px;
+            padding: 8px;
+        }
+        .btn {
+            padding: 8px 12px;
+            color: blue;
+            background-color: white;
+            text-decoration: none;
+            cursor: pointer;
+            text-align: center;
+            border: 1px black solid;
+        }
+        .btn:hover {
+            transition: ease all 0.5s;
+            background-color:blue;
+            color:  white;
+        }
     </style>
+
   </head>
   <body>
-    <h1>Get a quick summary of this page!</h1>
-    <button>Summarize</button>
-    <div id="summary-result">
-
-    </div>
+        <div class="wrapper">
+            <h1>Get a quick summary!</h1>
+            <button class="btn">Summarize</button>
+            
+        </div>
+        <hr>
+        <div id="summary-result">
+        
+        </div>
     <script src="popup.js"></script>
   </body>
 </html>
