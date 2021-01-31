@@ -2,20 +2,32 @@
 
 const btn = document.querySelector('button');
 
-var url;
+var cur_url;
 chrome.tabs.query({active: true, lastFocusedWindow: true}, tabs => {
-  url = tabs[0].url;
+  cur_url = tabs[0].url;
 });
 
-function sendData(data) {
-  fetch('https://summarizr1.pythonanywhere.com/extensionResult/', {
+async function sendData(data) {
+  await fetch('https://summarizr1.pythonanywhere.com/extensionResult/', {
     method: "POST",
-    body: JSON.stringify(data)
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
   }).then(res => {
     console.log("Request complete! Response: ", res);
+  });
+
+  await fetch('https://summarizr1.pythonanywhere.com/extensionResult/', {
+    method: "GET",
+    mode: 'cors',
+  }).then(response => response.json())
+  .then(data => {
+    document.getElementById('summary-result').innerHTML = data['summary'];
   });
 }
 
 btn.addEventListener('click', function() {
-  sendData(url);
+  var json = {"url" : cur_url}
+  sendData(json);
 });
